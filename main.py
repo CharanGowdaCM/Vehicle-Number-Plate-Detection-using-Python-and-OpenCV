@@ -37,14 +37,13 @@ dimensions, img_dilate = segment_characters(plate)
 
 char_list = find_contours(dimensions, img_dilate)
 
-#model = keras.models.load_model('model.h5')
 extracted_text=""
-image = Image.fromarray(img_dilate)
+#image = Image.fromarray(img_dilate)
 for char_img in char_list:
     char_img = Image.fromarray(char_img)
     if char_img.mode == 'F':
         char_img = char_img.convert('L')
-    # Use pytesseract to recognize each individual character image
+  
     # '--psm 10' mode treats each input image as a single character
     custom_config = r'--oem 3 --psm 10'  
     char_text = pytesseract.image_to_string(char_img, config=custom_config)
